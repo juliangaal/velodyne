@@ -8,15 +8,15 @@
   
   <xacro:property name="M_PI" value="3.14159265359"/>
   <xacro:property name="height" value="3.14159265359"/>
-  <xacro:property name="diameter" value="0.016"/>
+  <xacro:property name="diameter" value="0.1095"/>
   <xacro:property name="radius" value="${diameter/2}" />
    
   <link name="base_footprint"/>
   <link name="base_link">
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0" />
+      <origin xyz="${-diameter} ${radius - 0.0039} 0" rpy="${M_PI/2} 0 0" />
       <geometry>
-        <mesh filename="package://velodyne_description/meshes/velodyne_puck.stl"/>
+        <mesh filename="package://velodyne_description/meshes/velodyne_puck.stl" scale="0.025 0.025 0.025"/>
       </geometry>
       <material name="silver" >
         <color rgba="0.5 0.5 0.5 1" />
@@ -24,9 +24,9 @@
     </visual>
   </link>
   
-  <joint name="base_footprint_to_base_joint" type="fixed">
+  <joint name="velodyne_link_to_base_link" type="fixed">
     <!-- origin xyz="0 0 0.2" rpy="0 ${-M_PI/18.0} 0" /-->
-    <origin xyz="0 0 0" rpy="${M_PI/2} 0 ${M_PI}" />
+    <origin xyz="0 0 0" rpy="0 0 ${M_PI}" />
     <parent link="base_footprint"/>
     <child link="base_link" />
   </joint>
